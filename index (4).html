@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OriGen — Próximo seminario vivencial</title>
+<style>
+  :root{
+    --navy: #16214a;
+    --navy-2: #1c2a5e;
+    --blue-accent: #a9c2e8;
+    --blue-soft: #eef2f9;
+    --ink: #16214a;
+    --muted: #5b6b8c;
+    --white: #ffffff;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family: 'Georgia', 'Iowan Old Style', serif;
+    color:var(--ink);
+    background:var(--white);
+    line-height:1.5;
+  }
+  .sans{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; }
+
+  a{ text-decoration:none; }
+
+  .hero{
+    background: radial-gradient(circle at 50% 0%, #23306b 0%, var(--navy) 60%, #101a3d 100%);
+    color:white;
+    text-align:center;
+    padding: 72px 24px 80px;
+  }
+  .eyebrow{
+    display:inline-block;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-size:13px;
+    letter-spacing:0.03em;
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.18);
+    color:#cfd9f2;
+    padding:8px 18px;
+    border-radius:999px;
+    margin-bottom:28px;
+  }
+  .logo{
+    font-family: 'Trebuchet MS', -apple-system, sans-serif;
+    font-weight:800;
+    font-size:clamp(48px, 9vw, 82px);
+    letter-spacing:-0.02em;
+    margin:0 0 20px;
+    background: linear-gradient(180deg,#ffffff, #c7d4ee);
+    -webkit-background-clip:text;
+    background-clip:text;
+    -webkit-text-fill-color:transparent;
+  }
+  .hero h2{
+    font-weight:400;
+    font-size:clamp(22px, 3.4vw, 32px);
+    margin:0 0 36px;
+  }
+  .hero h2 b{ font-weight:700; }
+  .cta{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    background: linear-gradient(180deg,#3a4c8f,#2a3a75);
+    color:white;
+    font-weight:700;
+    font-size:16px;
+    padding:18px 34px;
+    border-radius:12px;
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow: 0 12px 30px rgba(16,26,61,0.45);
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .cta:hover{ transform:translateY(-2px); box-shadow:0 16px 34px rgba(16,26,61,0.55); }
+
+  section{ padding:80px 24px; }
+  .section-inner{ max-width:1040px; margin:0 auto; }
+
+  .what h2{
+    text-align:center;
+    font-style:italic;
+    color:var(--navy);
+    font-size:clamp(28px, 4vw, 40px);
+    margin-bottom:36px;
+  }
+  .what p{
+    max-width:760px;
+    margin:0 auto 22px;
+    text-align:center;
+    color:#2c3a63;
+    font-size:18px;
+  }
+  .what strong{ color:var(--navy); }
+  .tag-line{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    max-width:480px;
+    margin:36px auto 0;
+    background:var(--blue-soft);
+    border-radius:14px;
+    padding:16px 22px;
+    text-align:center;
+    font-size:15px;
+    color:var(--navy);
+    font-weight:600;
+  }
+  .tag-line::before{ content:"✦ "; color:#7b8ec9; }
+
+  .levels{
+    background:var(--blue-soft);
+  }
+  .cards{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  @media (max-width:800px){ .cards{ grid-template-columns:1fr; } }
+  .card{
+    border-radius:20px;
+    padding:38px;
+  }
+  .card.light{ background:white; border:1px solid #e3e8f4; }
+  .card.dark{ background:linear-gradient(160deg,var(--navy),#0f1a3d); color:white; }
+  .icon-box{
+    width:56px;height:56px;
+    border-radius:14px;
+    display:flex;align-items:center;justify-content:center;
+    font-size:26px;
+    margin-bottom:22px;
+  }
+  .card.light .icon-box{ background:var(--blue-soft); color:var(--navy); }
+  .card.dark .icon-box{ background:rgba(255,255,255,0.1); color:#cfd9f2; }
+  .card h3{ font-size:28px; margin:0 0 14px; }
+  .card p{ font-size:15.5px; margin:0 0 16px; }
+  .card.light p{ color:#3a4668; }
+  .card.dark p{ color:#dbe2f4; }
+  .card ul{ padding-left:18px; margin:0 0 20px; font-size:15px; }
+  .card.light ul{ color:#3a4668; }
+  .card.dark ul{ color:#dbe2f4; }
+  .quote{
+    border-radius:12px;
+    padding:16px 18px;
+    font-style:italic;
+    font-size:14.5px;
+  }
+  .card.light .quote{ background:var(--blue-soft); color:#2c3a63; }
+  .card.dark .quote{ background:rgba(255,255,255,0.08); color:white; }
+
+  .pricing h2, .dates h2{
+    text-align:center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    font-weight:800;
+    color:var(--navy);
+    font-size:clamp(26px,4vw,36px);
+    margin:0 0 10px;
+  }
+  .pricing .sub, .dates .sub{
+    text-align:center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    color:var(--muted);
+    margin-bottom:44px;
+    font-size:17px;
+  }
+  .price-card{
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    background:linear-gradient(160deg,var(--navy),#0f1a3d);
+    color:white;
+    border-radius:24px;
+    padding:44px;
+    display:grid;
+    grid-template-columns:1.3fr 1fr;
+    gap:32px;
+    align-items:center;
+    max-width:900px;
+    margin:0 auto;
+  }
+  @media (max-width:760px){ .price-card{ grid-template-columns:1fr; } }
+  .badge{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    background:rgba(255,255,255,0.1);
+    border:1px solid rgba(255,255,255,0.2);
+    border-radius:999px;
+    padding:6px 14px;
+    font-size:12.5px;
+    margin-bottom:16px;
+    color:#cfd9f2;
+  }
+  .price-card h3{ font-size:30px; margin:0 0 6px; }
+  .price-card .total{ color:#a9b6dd; font-size:15px; margin-bottom:20px; }
+  .price-card .perk{ font-size:14.5px; margin-bottom:8px; color:#dbe2f4; }
+  .price-card .perk b{ color:white; }
+  .promo-box{
+    background:rgba(255,255,255,0.06);
+    border-radius:16px;
+    padding:26px;
+    text-align:center;
+  }
+  .promo-box .label{ font-size:12px; letter-spacing:0.05em; color:#a9b6dd; margin-bottom:8px; }
+  .promo-box .amount{ font-size:44px; font-weight:800; margin-bottom:18px; }
+  .promo-box .amount span{ font-size:22px; font-weight:600; }
+  .promo-btn{
+    display:block;
+    background:#cfe0f7;
+    color:var(--navy);
+    font-weight:700;
+    padding:14px;
+    border-radius:10px;
+  }
+  .separate{
+    max-width:900px;
+    margin:28px auto 0;
+    background:var(--blue-soft);
+    border-radius:20px;
+    padding:34px;
+    text-align:center;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  .separate p{ font-weight:700; color:var(--navy); margin:0 0 18px; font-size:17px; }
+  .separate .amounts{ display:flex; gap:40px; justify-content:center; flex-wrap:wrap; margin-bottom:14px; }
+  .separate .amounts b{ color:var(--navy); }
+  .separate small{ color:var(--muted); }
+
+  .dates{ background:var(--blue-soft); }
+  .date-cols{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:28px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+    max-width:900px;
+    margin:0 auto;
+  }
+  @media (max-width:760px){ .date-cols{ grid-template-columns:1fr; } }
+  .date-col{ border-radius:20px; padding:28px; }
+  .date-col.light{ background:white; border:1px solid #e3e8f4; }
+  .date-col.dark{ background:linear-gradient(160deg,var(--navy),#0f1a3d); color:white; }
+  .date-col-title{ display:flex; align-items:center; gap:10px; font-weight:800; font-size:19px; margin-bottom:18px; }
+  .date-item{
+    border-radius:12px;
+    padding:14px 16px;
+    margin-bottom:12px;
+    font-size:14.5px;
+  }
+  .date-col.light .date-item{ background:var(--blue-soft); }
+  .date-col.dark .date-item{ background:rgba(255,255,255,0.08); }
+  .date-day{ font-weight:700; display:block; margin-bottom:2px; }
+  .date-time{ color:var(--muted); }
+  .date-col.dark .date-time{ color:#cfd9f2; }
+
+  .important{
+    max-width:900px;
+    margin:0 auto;
+    background:linear-gradient(160deg,var(--navy),#0f1a3d);
+    color:white;
+    border-radius:20px;
+    padding:38px 40px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  .important h4{ display:flex; align-items:center; gap:10px; font-size:20px; margin:0 0 18px; }
+  .important ul{ padding-left:20px; margin:0; color:#dbe2f4; font-size:15px; }
+  .important li{ margin-bottom:12px; }
+
+  footer{
+    background: var(--navy);
+    color:white;
+    text-align:center;
+    padding:70px 24px 40px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  }
+  footer h2{
+    font-size:clamp(26px,4.5vw,42px);
+    font-weight:800;
+    margin:0 0 30px;
+  }
+  footer h2 span{ color:var(--blue-accent); }
+  footer .brand{ color:#c7d4ee; margin-bottom:2px; }
+  footer .brand.sub{ margin-bottom:30px; }
+  .footer-btns{ display:flex; gap:16px; justify-content:center; flex-wrap:wrap; margin-bottom:36px; }
+  .footer-btn{
+    display:inline-flex; align-items:center; gap:8px;
+    border:1px solid rgba(255,255,255,0.25);
+    padding:12px 22px;
+    border-radius:999px;
+    color:white;
+    font-size:14.5px;
+    font-weight:600;
+  }
+  footer .copy{ color:#8b98bd; font-size:13px; }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <span class="eyebrow sans">Coaching • Gestalt • PNL</span>
+    <h1 class="logo">OriGen</h1>
+    <h2>Próximo <b>seminario vivencial.</b></h2>
+    <a class="cta" href="#precios">Inscripciones abiertas ›</a>
+  </section>
+
+  <section class="what">
+    <div class="section-inner">
+      <h2>¿Qué son?</h2>
+      <p>En estos <strong>9 días de seminario</strong>, los participantes comienzan con el nivel Inicial, donde exploran herramientas de PNL, coaching y Gestalt para expandir su conciencia sobre cómo piensan, sienten y actúan.</p>
+      <p>Luego, en el nivel Avanzado, viven un proceso de transformación profunda, identificando y trascendiendo creencias limitantes que impactan sus resultados y su SER.</p>
+      <div class="tag-line">Un espacio donde la experiencia presencial es protagonista.</div>
+    </div>
+  </section>
+
+  <section class="levels">
+    <div class="section-inner cards">
+      <div class="card light">
+        <div class="icon-box">🌱</div>
+        <h3>Inicial</h3>
+        <p>Inicial es un primer encuentro profundo con vos. Es un espacio donde vas a poder empezar a tomar conciencia de cómo estás viviendo hoy, qué patrones repetís, qué te limita y qué posibilidades todavía no estás viendo.</p>
+        <p style="font-weight:700;">A través de dinámicas vivenciales, vas a:</p>
+        <ul>
+          <li>Observar tu manera de pensar y actuar</li>
+          <li>Identificar creencias que hoy te condicionan</li>
+          <li>Empezar a abrir nuevas formas de ver y habitar tu vida</li>
+        </ul>
+        <div class="quote">"Hay cosas que, una vez que las ves, ya no podés dejar de ver."</div>
+      </div>
+      <div class="card dark">
+        <div class="icon-box">🧠</div>
+        <h3>Avanzado</h3>
+        <p>No se trata de hacer más. Se trata de ser distinto.</p>
+        <p>Avanzado es un seminario profundo y revelador. Un espacio donde, además de descubrir nuevas formas de SER que te posibilitan la vida que querés, vas a poder vivenciarlas y habitarlas.</p>
+        <p>A través de dinámicas corporo-emocionales que facilitan un aprendizaje profundo, la invitación es a integrar la experiencia y expandir tu manera de estar en la vida.</p>
+        <div class="quote">"Muchas personas viven este seminario como un antes y un después."</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing" id="precios">
+    <div class="section-inner">
+      <h2>Valores del Seminario</h2>
+      <p class="sub">Invertí en tu desarrollo humano.</p>
+
+      <div class="price-card">
+        <div>
+          <span class="badge">🏷 Experiencia completa</span>
+          <h3>Inicial + Avanzado</h3>
+          <div class="total">Valor total: $750.000</div>
+          <div class="perk">💳 <b>PROMO ESPECIAL:</b> Depósito o transferencia</div>
+          <div class="perk">💳 Hasta <b>3 cuotas SIN INTERÉS</b> con tarjeta</div>
+        </div>
+        <div class="promo-box">
+          <div class="label">VALOR PROMOCIONAL</div>
+          <div class="amount">$550<span>.000</span></div>
+          <a class="promo-btn" href="#contacto">Inscribirme ahora</a>
+        </div>
+      </div>
+
+      <div class="separate">
+        <p>Si querés hacerlo por separado:</p>
+        <div class="amounts">
+          <span>✦ INICIAL: <b>$300.000</b></span>
+          <span>🧠 AVANZADO: <b>$400.000</b></span>
+        </div>
+        <small>Ambos niveles por separado tienen recargo en pagos con tarjeta de crédito.</small>
+      </div>
+    </div>
+  </section>
+
+  <section class="dates">
+    <div class="section-inner">
+      <h2>Fechas Agosto / Septiembre</h2>
+      <p class="sub">Hacé posible lo que soñás.</p>
+
+      <div class="date-cols">
+        <div class="date-col light">
+          <div class="date-col-title">🗓 INICIAL</div>
+          <div class="date-item">
+            <span class="date-day">Jue. 27 de agosto</span>
+            <span class="date-time">🕒 18hs. – Acreditación. | 19hs. a 24hs.</span>
+          </div>
+          <div class="date-item">
+            <span class="date-day">Vie. 28 de agosto</span>
+            <span class="date-time">🕒 18hs. a 24hs.</span>
+          </div>
+          <div class="date-item">
+            <span class="date-day">Sáb. 29 de agosto</span>
+            <span class="date-time">🕒 10hs. a 20hs.</span>
+          </div>
+          <div class="date-item">
+            <span class="date-day">Dom. 30 de agosto</span>
+            <span class="date-time">🕒 10hs. a 19hs.</span>
+          </div>
+        </div>
+        <div class="date-col dark">
+          <div class="date-col-title">🗓 AVANZADO</div>
+          <div class="date-item">
+            <span class="date-day">Mié. 09 de sept.</span>
+            <span class="date-time">🕒 13hs. – Acreditación. | 14hs. a 24hs.</span>
+          </div>
+          <div class="date-item">
+            <span class="date-day">Jue. 10 de sept.</span>
+            <span class="date-time">🕒 14hs. a 24hs.</span>
+          </div>
+          <div class="date-item">
+            <span class="date-day">Vie. 11 de sept.</span>
+            <span class="date-time">🕒 14hs. a 24hs.</span>
+          </div>
+          <div class="date-item">
+            <span class="date-day">Sáb. 12 de sept.</span>
+            <span class="date-time">🕒 Desde las 10hs.</span>
+          </div>
+          <div class="date-item">
+            <span class="date-day">Dom. 13 de sept.</span>
+            <span class="date-time">🕒 10hs. a 20hs.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="important">
+      <h4>⚠ Importante</h4>
+      <ul>
+        <li>El seminario tiene un cupo mínimo de personas para su realización. En caso de no alcanzar ese número, se reprogramará con aviso previo.</li>
+        <li>Las fechas previstas pueden estar sujetas a modificación por razones organizativas. En caso de cambios, se notificará con antelación a todos los inscriptos.</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer id="contacto">
+    <h2>¿Estás listo para tu <span>salto cuántico?</span></h2>
+    <div class="brand">OriGen – Seminarios Vivenciales</div>
+    <div class="brand sub">Liderazgo y Gestión de equipo</div>
+    <div class="footer-btns">
+      <a class="footer-btn" href="https://wa.me/541138332372" target="_blank">💬 WhatsApp: 11 3833-2372</a>
+      <a class="footer-btn" href="https://instagram.com/origen.centrocuantico" target="_blank">📷 @origen.centrocuantico</a>
+    </div>
+    <div class="copy">© 2026 OriGen Centro Cuántico. Todos los derechos reservados.</div>
+  </footer>
+
+</body>
+</html>
